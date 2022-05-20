@@ -19,15 +19,15 @@ public class Category {
 	@Column
 	private int id;
 	@Column(length = 255, nullable = false)
-	private int name;
+	private String name;
 	@OneToMany(mappedBy = "category")
 	private List<Task> tasks;
 
-	public int getName() {
+	public String getName() {
 		return name;
 	}
 
-	public void setName(int name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
