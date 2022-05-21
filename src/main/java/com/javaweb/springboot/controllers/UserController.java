@@ -25,6 +25,9 @@ public class UserController {
 	@GetMapping(value = "/{email}")
 	public UserDto getUser(@PathVariable(name = "email") String email) {
 		User user = service.getUser(email);
+		if (user == null) {
+			return null;
+		}
 		UserDto userDto = modelMapper.map(user, UserDto.class);
 		return userDto;
 	}
