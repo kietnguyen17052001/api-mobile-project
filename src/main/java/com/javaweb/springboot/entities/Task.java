@@ -36,6 +36,8 @@ public class Task {
 	private Timestamp createdAt;
 	@Column(name = "updated_at")
 	private Timestamp updatedAt;
+	@Column
+	private boolean completed;
 
 	public String getName() {
 		return name;
@@ -91,6 +93,14 @@ public class Task {
 
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 
 	public int getId() {
