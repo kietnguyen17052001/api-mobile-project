@@ -1,13 +1,11 @@
 package com.javaweb.springboot.dtos;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 public class NewListDto {
 	private int id;
 	private String name;
 	private int createdBy;
-	private List<TaskDto> tasks;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 
@@ -33,14 +31,6 @@ public class NewListDto {
 
 	public void setCreatedBy(int createdBy) {
 		this.createdBy = createdBy;
-	}
-
-	public List<TaskDto> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(List<TaskDto> tasks) {
-		this.tasks = tasks;
 	}
 
 	public Timestamp getCreatedAt() {

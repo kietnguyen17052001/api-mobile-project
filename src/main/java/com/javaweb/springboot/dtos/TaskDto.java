@@ -11,6 +11,7 @@ public class TaskDto {
 	private String description;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	private boolean completed;
 
 	public int getId() {
 		return id;
@@ -74,6 +75,14 @@ public class TaskDto {
 
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public boolean isCompleted() {
+		return completed;
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed = completed;
 	}
 
 }
