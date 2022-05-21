@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `tbl_category`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_category` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` int NOT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UK8f25rdca1qev4kqtyrxwsx0k8` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -76,6 +76,7 @@ DROP TABLE IF EXISTS `tbl_task`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbl_task` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `completed` bit(1) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `description` varchar(255) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -117,7 +118,7 @@ CREATE TABLE `tbl_user` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `UKnpn1wf1yu1g5rjohbek375pp1` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,6 +127,7 @@ CREATE TABLE `tbl_user` (
 
 LOCK TABLES `tbl_user` WRITE;
 /*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
+INSERT INTO `tbl_user` VALUES (1,'2022-05-21 09:36:01','Dang Kiet','kietnguyen17@gmail.com','2022-05-21 09:45:17');
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -138,4 +140,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-19 11:09:49
+-- Dump completed on 2022-05-21 10:09:45
