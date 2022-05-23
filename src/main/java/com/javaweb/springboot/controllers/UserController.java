@@ -33,14 +33,16 @@ public class UserController {
 	}
 
 	@PostMapping
-	public void create(@RequestBody UserDto userDto) {
+	public UserDto create(@RequestBody UserDto userDto) {
 		User user = modelMapper.map(userDto, User.class);
 		service.create(user);
+		return modelMapper.map(user, UserDto.class);
 	}
 
 	@PutMapping(value = "/{id}")
-	public void udpate(@PathVariable(name = "id") int id, @RequestBody UserDto userDto) {
+	public UserDto udpate(@PathVariable(name = "id") int id, @RequestBody UserDto userDto) {
 		User user = modelMapper.map(userDto, User.class);
 		service.update(id, user);
+		return modelMapper.map(user, UserDto.class);
 	}
 }

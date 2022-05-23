@@ -20,19 +20,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void create(User user) {
+	public User create(User user) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		user.setCreatedAt(timestamp);
 		user.setUpdatedAt(timestamp);
 		repository.save(user);
+		return user;
 	}
 
 	@Override
-	public void update(int id, User userRequest) {
+	public User update(int id, User userRequest) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		User user = repository.findOneById(id);
 		user.setDisplayName(userRequest.getDisplayName());
 		user.setUpdatedAt(timestamp);
 		repository.save(user);
+		return user;
 	}
 }
