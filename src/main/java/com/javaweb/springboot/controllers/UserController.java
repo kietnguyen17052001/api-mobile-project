@@ -37,8 +37,7 @@ public class UserController {
 	@PostMapping
 	public UserDto create(@RequestBody UserDto userDto) {
 		User user = modelMapper.map(userDto, User.class);
-		service.create(user);
-		return modelMapper.map(user, UserDto.class);
+		return modelMapper.map(service.create(user), UserDto.class);
 	}
 
 	@PutMapping(value = "/{id}")
