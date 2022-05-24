@@ -44,7 +44,6 @@ public class UserController {
 	@PutMapping(value = "/{id}")
 	public UserDto udpate(@PathVariable(name = "id") int id, @RequestBody UserDto userDto) {
 		User user = modelMapper.map(userDto, User.class);
-		service.update(id, user);
-		return modelMapper.map(user, UserDto.class);
+		return modelMapper.map(service.update(id, user), UserDto.class);
 	}
 }
