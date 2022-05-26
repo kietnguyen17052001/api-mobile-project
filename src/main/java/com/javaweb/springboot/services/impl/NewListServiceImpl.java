@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.javaweb.springboot.entities.NewList;
+import com.javaweb.springboot.entities.Task;
 import com.javaweb.springboot.repositories.NewListRepository;
+import com.javaweb.springboot.repositories.TaskRepository;
 import com.javaweb.springboot.repositories.UserRepository;
 import com.javaweb.springboot.services.NewListService;
 
@@ -17,6 +19,8 @@ public class NewListServiceImpl implements NewListService {
 	private NewListRepository repository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private TaskRepository taskRepository;
 
 	@Override
 	public List<NewList> getNewListsByUserId(int userId) {
@@ -47,7 +51,9 @@ public class NewListServiceImpl implements NewListService {
 	public void delete(int newListId) {
 		NewList newList = repository.findOneById(newListId);
 		newList.setTasks(null);
-		repository.save(newList);
+		for (Task task : newList.getTasks()) {
+			taskRepository.delete(task);
+		}
 		repository.delete(newList);
 	}
 
