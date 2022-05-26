@@ -50,7 +50,6 @@ public class NewListServiceImpl implements NewListService {
 	@Override
 	public void delete(int newListId) {
 		NewList newList = repository.findOneById(newListId);
-		newList.setTasks(null);
 		for (Task task : newList.getTasks()) {
 			taskRepository.delete(task);
 		}
