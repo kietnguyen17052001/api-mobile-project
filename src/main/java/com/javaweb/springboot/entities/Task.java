@@ -27,7 +27,7 @@ public class Task {
 	@ManyToOne(targetEntity = Category.class, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "fk_category_id", nullable = false)
 	private Category category;
-	@ManyToOne(targetEntity = User.class, cascade = CascadeType.PERSIST)
+	@ManyToOne(targetEntity = NewList.class, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "fk_new_list_id", nullable = true)
 	private NewList newList;
 	@Column(length = 255, name = "description", nullable = false)
