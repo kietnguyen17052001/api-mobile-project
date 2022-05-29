@@ -15,9 +15,9 @@ import com.javaweb.springboot.services.TaskService;
 
 @Service
 public class TaskServiceImpl implements TaskService {
-	private static final int MYDAY_ID = 1;
-	private static final int IMPORTANT_ID = 2;
-	private static final int NEWLIST_ID = 3;
+	private static final int MYDAY_ID = 4;
+	private static final int IMPORTANT_ID = 14;
+	private static final int NEWLIST_ID = 24;
 
 	@Autowired
 	private TaskRepository repository;
