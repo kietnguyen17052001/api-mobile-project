@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "tbl_user", uniqueConstraints = @UniqueConstraint(columnNames = { "email" }))
+@Table(name = "tbl_user", uniqueConstraints = @UniqueConstraint(columnNames = { "email", "username" }))
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +21,10 @@ public class User {
 	private int id;
 	@Column(length = 50, name = "email", nullable = false)
 	private String email;
+	@Column(length = 50, name = "username", nullable = false)
+	private String username;
+	@Column(name = "password", nullable = false)
+	private String password;
 	@Column(length = 255, name = "display_name", nullable = false)
 	private String displayName;
 	@Column(name = "created_at")
@@ -38,6 +42,22 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getDisplayName() {

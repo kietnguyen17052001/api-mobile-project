@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.javaweb.springboot.dtos.UserDto;
@@ -25,24 +26,33 @@ public class UserController {
 	private ModelMapper modelMapper;
 
 	@GetMapping(value = "/{email}")
-	public UserDto getUser(@PathVariable(name = "email") String email) {
-		User user = service.getUser(email);
+	public UserDto getUserByEmail(@PathVariable(name = "email") String email) {
+		User user = service.getUserByEmail(email);
 		if (user == null) {
 			return null;
 		}
-		UserDto userDto = modelMapper.map(user, UserDto.class);
-		return userDto;
+		return modelMapper.map(user, UserDto.class);
+	}
+
+	@GetMapping
+	public UserDto getUserByUsernameAndPassword(@RequestParam(value = "username") String username,
+			@RequestParam(value = "password") String password) {
+		User user = service.getUserByUsernameAndPassword(username, password);
+		if (user == null) {
+			return null;
+		}
+		return modelMapper.map(user, UserDto.class);
 	}
 
 	@PostMapping
-	public UserDto create(@RequestBody UserDto userDto) {
-		User user = modelMapper.map(userDto, User.class);
+	public UserDto create(@RequestBody UserDto userDtoRequest) {
+		User user = modelMapper.map(userDtoRequest, User.class);
 		return modelMapper.map(service.create(user), UserDto.class);
 	}
 
 	@PutMapping(value = "/{id}")
-	public UserDto udpate(@PathVariable(name = "id") int id, @RequestBody UserDto userDto) {
-		User user = modelMapper.map(userDto, User.class);
+	public UserDto udpate(@PathVariable(name = "id") int id, @RequestBody UserDto userDtoRequest) {
+		User user = modelMapper.map(userDtoRequest, User.class);
 		return modelMapper.map(service.update(id, user), UserDto.class);
 	}
 }

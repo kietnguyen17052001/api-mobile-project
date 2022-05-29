@@ -1,10 +1,12 @@
 package com.javaweb.springboot.services.impl;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.common.hash.Hashing;
 import com.javaweb.springboot.entities.User;
 import com.javaweb.springboot.repositories.UserRepository;
 import com.javaweb.springboot.services.UserService;
@@ -15,13 +17,20 @@ public class UserServiceImpl implements UserService {
 	private UserRepository repository;
 
 	@Override
-	public User getUser(String email) {
+	public User getUserByUsernameAndPassword(String username, String password) {
+		password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+		return repository.findByUsernameAndPassword(username, password);
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
 		return repository.findByEmail(email);
 	}
 
 	@Override
 	public User create(User user) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		user.setPassword(Hashing.sha256().hashString(user.getPassword(), StandardCharsets.UTF_8).toString());
 		user.setCreatedAt(timestamp);
 		user.setUpdatedAt(timestamp);
 		repository.save(user);
@@ -37,4 +46,5 @@ public class UserServiceImpl implements UserService {
 		repository.save(user);
 		return user;
 	}
+
 }
