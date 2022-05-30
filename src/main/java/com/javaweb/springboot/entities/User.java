@@ -21,13 +21,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int id;
-	@Column(length = 50, name = "email", nullable = false)
+	@Column(length = 50, name = "email", nullable = true)
 	private String email;
 	@Column(length = 50, name = "username", nullable = true)
 	private String username;
 	@Column(name = "password", nullable = true)
 	private String password;
-	@Column(length = 255, name = "display_name", nullable = true)
+	@Column(length = 255, name = "display_name", nullable = false)
 	private String displayName;
 	@Column(name = "created_at")
 	private Timestamp createdAt;
