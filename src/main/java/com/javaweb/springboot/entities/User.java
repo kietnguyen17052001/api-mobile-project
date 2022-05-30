@@ -3,11 +3,13 @@ package com.javaweb.springboot.entities;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -21,16 +23,19 @@ public class User {
 	private int id;
 	@Column(length = 50, name = "email", nullable = false)
 	private String email;
-	@Column(length = 50, name = "username", nullable = false)
+	@Column(length = 50, name = "username", nullable = true)
 	private String username;
-	@Column(name = "password", nullable = false)
+	@Column(name = "password", nullable = true)
 	private String password;
-	@Column(length = 255, name = "display_name", nullable = false)
+	@Column(length = 255, name = "display_name", nullable = true)
 	private String displayName;
 	@Column(name = "created_at")
 	private Timestamp createdAt;
 	@Column(name = "updated_at")
 	private Timestamp updatedAt;
+	@ManyToOne(targetEntity = LoginType.class, cascade = CascadeType.PERSIST)
+	@Column(name = "fk_logintype_id", nullable = false)
+	private LoginType loginType;
 	@OneToMany(mappedBy = "user")
 	private List<NewList> newLists;
 	@OneToMany(mappedBy = "user")
@@ -82,6 +87,14 @@ public class User {
 
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public LoginType getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(LoginType loginType) {
+		this.loginType = loginType;
 	}
 
 	public List<NewList> getNewLists() {

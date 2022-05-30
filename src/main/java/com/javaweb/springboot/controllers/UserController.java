@@ -41,12 +41,11 @@ public class UserController {
 		if (user == null) {
 			return null;
 		}
-		System.out.println(modelMapper.map(user, UserDto.class).getPassword());
 		return modelMapper.map(user, UserDto.class);
 	}
 
 	@PostMapping
-	public UserDto create(@RequestBody UserDto userDtoRequest) {
+	public UserDto create(@RequestParam(value = "loginType") int loginTypeId, @RequestBody UserDto userDtoRequest) {
 		User user = modelMapper.map(userDtoRequest, User.class);
 		return modelMapper.map(service.create(user), UserDto.class);
 	}

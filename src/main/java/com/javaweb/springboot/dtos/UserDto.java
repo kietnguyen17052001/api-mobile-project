@@ -2,9 +2,6 @@ package com.javaweb.springboot.dtos;
 
 import java.sql.Timestamp;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class UserDto {
 	private int id;
 	private String displayName;
@@ -13,6 +10,7 @@ public class UserDto {
 	private String password;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
+	private int loginTypeId;
 
 	public int getId() {
 		return id;
@@ -68,6 +66,14 @@ public class UserDto {
 
 	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	public int getLoginTypeId() {
+		return loginTypeId;
+	}
+
+	public void setLoginTypeId(int loginTypeId) {
+		this.loginTypeId = loginTypeId;
 	}
 
 }
