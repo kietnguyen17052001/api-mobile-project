@@ -16,10 +16,13 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository repository;
 
+	public String hashPassword(String password) {
+		return Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+	}
+
 	@Override
 	public User getUserByUsernameAndPassword(String username, String password) {
-		password = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
-		return repository.findByUsernameAndPassword(username, password);
+		return repository.findByUsernameAndPassword(username, hashPassword(password));
 	}
 
 	@Override
@@ -30,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User create(User user) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		user.setPassword(Hashing.sha256().hashString(user.getPassword(), StandardCharsets.UTF_8).toString());
+		user.setPassword(hashPassword(user.getPassword()));
 		user.setCreatedAt(timestamp);
 		user.setUpdatedAt(timestamp);
 		repository.save(user);
@@ -41,8 +44,13 @@ public class UserServiceImpl implements UserService {
 	public User update(int id, User userRequest) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		User user = repository.findOneById(id);
-		user.setDisplayName(userRequest.getDisplayName());
 		user.setUpdatedAt(timestamp);
+		if (!user.getDisplayName().equals(userRequest.getDisplayName())) {
+			user.setDisplayName(userRequest.getDisplayName());
+		}
+		if (!user.getPassword().equals(hashPassword(userRequest.getPassword()))) {
+			user.setPassword(hashPassword(userRequest.getPassword()));
+		}
 		repository.save(user);
 		return user;
 	}
