@@ -2,6 +2,9 @@ package com.javaweb.springboot.dtos;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TaskDto {
 	private int id;
 	private String name;
@@ -29,6 +32,8 @@ public class TaskDto {
 		this.name = name;
 	}
 
+	@JsonIgnore
+	@JsonProperty(value = "createdBy")
 	public int getCreatedBy() {
 		return createdBy;
 	}
@@ -37,6 +42,8 @@ public class TaskDto {
 		this.createdBy = createdBy;
 	}
 
+	@JsonIgnore
+	@JsonProperty(value = "categoryId")
 	public int getCategoryId() {
 		return categoryId;
 	}
@@ -45,6 +52,8 @@ public class TaskDto {
 		this.categoryId = categoryId;
 	}
 
+	@JsonIgnore
+	@JsonProperty(value = "newListId")
 	public int getNewListId() {
 		return newListId;
 	}

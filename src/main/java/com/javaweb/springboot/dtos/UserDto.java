@@ -2,6 +2,9 @@ package com.javaweb.springboot.dtos;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserDto {
 	private int id;
 	private String displayName;
@@ -35,6 +38,8 @@ public class UserDto {
 		this.email = email;
 	}
 
+	@JsonIgnore
+	@JsonProperty(value = "username")
 	public String getUsername() {
 		return username;
 	}
@@ -43,6 +48,8 @@ public class UserDto {
 		this.username = username;
 	}
 
+	@JsonIgnore
+	@JsonProperty(value = "password")
 	public String getPassword() {
 		return password;
 	}

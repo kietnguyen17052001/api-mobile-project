@@ -2,6 +2,9 @@ package com.javaweb.springboot.dtos;
 
 import java.sql.Timestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class NewListDto {
 	private int id;
 	private String name;
@@ -25,6 +28,8 @@ public class NewListDto {
 		this.name = name;
 	}
 
+	@JsonIgnore
+	@JsonProperty(value = "createdBy")
 	public int getCreatedBy() {
 		return createdBy;
 	}
