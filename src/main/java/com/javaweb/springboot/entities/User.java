@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -25,7 +26,7 @@ public class User {
 	private String email;
 	@Column(length = 50, name = "username", nullable = true)
 	private String username;
-	@Column(name = "password", nullable = true)
+	@Column(length = 255, name = "password", nullable = true)
 	private String password;
 	@Column(length = 255, name = "display_name", nullable = false)
 	private String displayName;
@@ -34,7 +35,7 @@ public class User {
 	@Column(name = "updated_at")
 	private Timestamp updatedAt;
 	@ManyToOne(targetEntity = LoginType.class, cascade = CascadeType.PERSIST)
-	@Column(name = "fk_logintype_id", nullable = false)
+	@JoinColumn(name = "fk_login_type_id", nullable = false)
 	private LoginType loginType;
 	@OneToMany(mappedBy = "user")
 	private List<NewList> newLists;

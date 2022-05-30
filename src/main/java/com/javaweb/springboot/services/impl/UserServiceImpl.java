@@ -14,6 +14,7 @@ import com.javaweb.springboot.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
+	private static final int GOOGLE = 1;
 	@Autowired
 	private UserRepository repository;
 	@Autowired
@@ -36,7 +37,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User create(User user, int loginTypeId) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		user.setPassword(hashPassword(user.getPassword()));
+		if (loginTypeId != GOOGLE) {
+			user.setPassword(hashPassword(user.getPassword()));
+		}
 		user.setCreatedAt(timestamp);
 		user.setUpdatedAt(timestamp);
 		user.setLoginType(loginTypeRepository.findOneById(loginTypeId));

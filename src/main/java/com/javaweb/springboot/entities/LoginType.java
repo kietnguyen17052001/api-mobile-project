@@ -11,13 +11,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_logintype")
+@Table(name = "tbl_login_type")
 public class LoginType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private int id;
-	@Column
+	@Column(length = 100, nullable = false)
 	private String name;
 	@OneToMany(mappedBy = "loginType")
 	private List<User> users;
