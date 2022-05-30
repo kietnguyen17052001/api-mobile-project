@@ -38,8 +38,6 @@ public class UserDto {
 		this.email = email;
 	}
 
-//	@JsonIgnore
-//	@JsonProperty(value = "username")
 	public String getUsername() {
 		return username;
 	}
@@ -48,8 +46,6 @@ public class UserDto {
 		this.username = username;
 	}
 
-	@JsonIgnore
-	@JsonProperty(value = "password")
 	public String getPassword() {
 		return password;
 	}
