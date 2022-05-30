@@ -47,7 +47,7 @@ public class UserController {
 	@PostMapping
 	public UserDto create(@RequestParam(value = "loginType") int loginTypeId, @RequestBody UserDto userDtoRequest) {
 		User user = modelMapper.map(userDtoRequest, User.class);
-		return modelMapper.map(service.create(user), UserDto.class);
+		return modelMapper.map(service.create(user, loginTypeId), UserDto.class);
 	}
 
 	@PutMapping(value = "/{id}")

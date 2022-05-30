@@ -4,10 +4,10 @@ import com.javaweb.springboot.entities.User;
 
 public interface UserService {
 	User getUserByUsernameAndPassword(String username, String password);
-	
+
 	User getUserByEmail(String email);
-	
-	User create(User user);
+
+	User create(User user, int loginTypeId);
 
 	User update(int id, User user);
 }

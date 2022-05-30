@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.hash.Hashing;
 import com.javaweb.springboot.entities.User;
+import com.javaweb.springboot.repositories.LoginTypeRepository;
 import com.javaweb.springboot.repositories.UserRepository;
 import com.javaweb.springboot.services.UserService;
 
@@ -15,6 +16,8 @@ import com.javaweb.springboot.services.UserService;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserRepository repository;
+	@Autowired
+	private LoginTypeRepository loginTypeRepository;
 
 	public String hashPassword(String password) {
 		return Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
@@ -31,11 +34,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User create(User user) {
+	public User create(User user, int loginTypeId) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		user.setPassword(hashPassword(user.getPassword()));
 		user.setCreatedAt(timestamp);
 		user.setUpdatedAt(timestamp);
+		user.setLoginType(loginTypeRepository.findOneById(loginTypeId));
 		repository.save(user);
 		return user;
 	}
