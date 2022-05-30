@@ -38,8 +38,8 @@ public class UserDto {
 		this.email = email;
 	}
 
-	@JsonIgnore
-	@JsonProperty(value = "username")
+//	@JsonIgnore
+//	@JsonProperty(value = "username")
 	public String getUsername() {
 		return username;
 	}

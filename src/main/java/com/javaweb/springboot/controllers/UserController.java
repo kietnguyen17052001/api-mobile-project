@@ -41,6 +41,7 @@ public class UserController {
 		if (user == null) {
 			return null;
 		}
+		System.out.println(modelMapper.map(user, UserDto.class).getPassword());
 		return modelMapper.map(user, UserDto.class);
 	}
 
