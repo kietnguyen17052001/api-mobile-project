@@ -14,7 +14,7 @@ import com.javaweb.springboot.services.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
-	private static final int GOOGLE = 1;
+	private static final int ACCOUNT = 2;
 	@Autowired
 	private UserRepository repository;
 	@Autowired
@@ -24,20 +24,28 @@ public class UserServiceImpl implements UserService {
 		return Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
 	}
 
+	// Login by account
 	@Override
 	public User getUserByUsernameAndPassword(String username, String password) {
 		return repository.findByUsernameAndPassword(username, hashPassword(password));
 	}
 
+	// Login by google
 	@Override
 	public User getUserByEmail(String email) {
 		return repository.findByEmail(email);
 	}
 
+	// Login by facebook
+	@Override
+	public User getUserByUID(String uid) {
+		return repository.findByUsername(uid);
+	}
+
 	@Override
 	public User create(User user, int loginTypeId) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		if (loginTypeId != GOOGLE) {
+		if (loginTypeId == ACCOUNT) {
 			user.setPassword(hashPassword(user.getPassword()));
 		}
 		user.setCreatedAt(timestamp);

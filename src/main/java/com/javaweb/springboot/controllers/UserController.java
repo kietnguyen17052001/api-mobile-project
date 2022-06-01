@@ -25,10 +25,19 @@ public class UserController {
 	@Autowired
 	private ModelMapper modelMapper;
 
-	@GetMapping(value = "/{email}")
+	@GetMapping(value = "/email/{email}")
 	public UserDto getUserByEmail(@PathVariable(name = "email") String email) {
 		User user = service.getUserByEmail(email);
 		if (user == null) {
+			return null;
+		}
+		return modelMapper.map(user, UserDto.class);
+	}
+
+	@GetMapping(value = "/uid/{uid}")
+	public UserDto getUserByUID(@PathVariable(name = "uid") String uid) {
+		User user = service.getUserByUID(uid);
+		if (user == null || user.getPassword() != null) {
 			return null;
 		}
 		return modelMapper.map(user, UserDto.class);
