@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User getUserByID(int id) {
+		return repository.findOneById(id);
+	}
+
+	@Override
 	public User create(User user, int loginTypeId) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		if (loginTypeId == ACCOUNT) {
