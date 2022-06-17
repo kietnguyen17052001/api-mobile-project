@@ -4,11 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import lombok.Data;
-
 import com.javaweb.springboot.entities.Task;
 import com.javaweb.springboot.repositories.CategoryRepository;
 import com.javaweb.springboot.repositories.NewListRepository;
@@ -16,17 +11,23 @@ import com.javaweb.springboot.repositories.TaskRepository;
 import com.javaweb.springboot.repositories.UserRepository;
 import com.javaweb.springboot.services.TaskService;
 
-@Data
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 @Service
 public class TaskServiceImpl implements TaskService {
 	private static final int MYDAY_ID = 1;
 	private static final int IMPORTANT_ID = 2;
 	private static final int NEWLIST_ID = 3;
 
-	private final TaskRepository repository;
-	private final CategoryRepository categoryRepository;
-	private final NewListRepository newListRepository;
-	private final UserRepository userRepository;
+	@Autowired
+	private TaskRepository repository;
+	@Autowired
+	private CategoryRepository categoryRepository;
+	@Autowired
+	private NewListRepository newListRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	public List<Task> getTasks(int userId, int categoryId) {
 		return repository.findAll().stream()

@@ -9,16 +9,16 @@ import com.javaweb.springboot.repositories.LoginTypeRepository;
 import com.javaweb.springboot.repositories.UserRepository;
 import com.javaweb.springboot.services.UserService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.Data;
-
 @Service
-@Data
 public class UserServiceImpl implements UserService {
 	private static final int ACCOUNT = 2;
-	private final UserRepository repository;
-	private final LoginTypeRepository loginTypeRepository;
+	@Autowired
+	private UserRepository repository;
+	@Autowired
+	private LoginTypeRepository loginTypeRepository;
 
 	public String hashPassword(String password) {
 		return Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();

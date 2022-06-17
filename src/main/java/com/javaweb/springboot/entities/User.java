@@ -1,6 +1,5 @@
 package com.javaweb.springboot.entities;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -16,13 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import lombok.Data;
-
 @Entity
-@Data
 @Table(name = "tbl_user", uniqueConstraints = @UniqueConstraint(columnNames = { "email", "username" }))
-public class User implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -46,5 +41,81 @@ public class User implements Serializable {
 	private List<NewList> newLists;
 	@OneToMany(mappedBy = "user")
 	private List<Task> tasks;
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Timestamp getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(Timestamp updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public LoginType getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(LoginType loginType) {
+		this.loginType = loginType;
+	}
+
+	public List<NewList> getNewLists() {
+		return newLists;
+	}
+
+	public void setNewLists(List<NewList> newLists) {
+		this.newLists = newLists;
+	}
+
+	public List<Task> getTasks() {
+		return tasks;
+	}
+
+	public void setTasks(List<Task> tasks) {
+		this.tasks = tasks;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 }
