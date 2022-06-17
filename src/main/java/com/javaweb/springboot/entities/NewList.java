@@ -1,5 +1,6 @@
 package com.javaweb.springboot.entities;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -14,9 +15,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "tbl_new_list")
-public class NewList {
+public class NewList implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -32,49 +37,4 @@ public class NewList {
 	private Timestamp createdAt;
 	@Column(name = "updated_at")
 	private Timestamp updatedAt;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public List<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
-	}
-
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Timestamp getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Timestamp updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public int getId() {
-		return id;
-	}
-
 }

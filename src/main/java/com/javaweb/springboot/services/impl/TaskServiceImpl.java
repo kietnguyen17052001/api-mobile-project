@@ -2,9 +2,12 @@ package com.javaweb.springboot.services.impl;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.Data;
 
 import com.javaweb.springboot.entities.Task;
 import com.javaweb.springboot.repositories.CategoryRepository;
@@ -13,20 +16,23 @@ import com.javaweb.springboot.repositories.TaskRepository;
 import com.javaweb.springboot.repositories.UserRepository;
 import com.javaweb.springboot.services.TaskService;
 
+@Data
 @Service
 public class TaskServiceImpl implements TaskService {
 	private static final int MYDAY_ID = 1;
 	private static final int IMPORTANT_ID = 2;
 	private static final int NEWLIST_ID = 3;
 
-	@Autowired
-	private TaskRepository repository;
-	@Autowired
-	private CategoryRepository categoryRepository;
-	@Autowired
-	private NewListRepository newListRepository;
-	@Autowired
-	private UserRepository userRepository;
+	private final TaskRepository repository;
+	private final CategoryRepository categoryRepository;
+	private final NewListRepository newListRepository;
+	private final UserRepository userRepository;
+
+	public List<Task> getTasks(int userId, int categoryId) {
+		return repository.findAll().stream()
+				.filter(t -> t.getUser().getId() == userId && t.getCategory().getId() == categoryId)
+				.collect(Collectors.toList());
+	}
 
 	public Task setStatusAndTime(Task task) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
@@ -38,12 +44,14 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public List<Task> getImportantTasks(int userId) {
-		return repository.getTaskByIdCategory(userId, IMPORTANT_ID);
+//		return repository.getTaskByIdCategory(userId, IMPORTANT_ID);
+		return getTasks(userId, IMPORTANT_ID);
 	}
 
 	@Override
 	public List<Task> getMydayTasks(int userId) {
-		return repository.getTaskByIdCategory(userId, MYDAY_ID);
+//		return repository.getTaskByIdCategory(userId, MYDAY_ID);
+		return getTasks(userId, MYDAY_ID);
 	}
 
 	@Override
@@ -104,8 +112,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public void delete(int taskId) {
-		Task task = repository.findOneById(taskId);
-		repository.delete(task);
+		repository.deleteById(taskId);
 	}
 
 }

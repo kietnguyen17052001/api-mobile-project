@@ -2,9 +2,8 @@ package com.javaweb.springboot.services.impl;
 
 import java.sql.Timestamp;
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import com.javaweb.springboot.entities.NewList;
 import com.javaweb.springboot.entities.Task;
@@ -13,18 +12,21 @@ import com.javaweb.springboot.repositories.TaskRepository;
 import com.javaweb.springboot.repositories.UserRepository;
 import com.javaweb.springboot.services.NewListService;
 
+import org.springframework.stereotype.Service;
+
+import lombok.Data;
+
 @Service
+@Data
 public class NewListServiceImpl implements NewListService {
-	@Autowired
-	private NewListRepository repository;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private TaskRepository taskRepository;
+
+	private final NewListRepository repository;
+	private final UserRepository userRepository;
+	private final TaskRepository taskRepository;
 
 	@Override
 	public List<NewList> getNewListsByUserId(int userId) {
-		return repository.getNewListByUserId(userId);
+		return repository.findAll().stream().filter(l -> l.getUser().getId() == userId).collect(Collectors.toList());
 	}
 
 	@Override

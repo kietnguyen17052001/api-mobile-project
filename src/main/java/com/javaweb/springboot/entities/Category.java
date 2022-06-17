@@ -1,5 +1,6 @@
 package com.javaweb.springboot.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,9 +12,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "tbl_category", uniqueConstraints = @UniqueConstraint(columnNames = { "name" }))
-public class Category {
+public class Category implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -22,25 +27,5 @@ public class Category {
 	private String name;
 	@OneToMany(mappedBy = "category")
 	private List<Task> tasks;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Task> getTasks() {
-		return tasks;
-	}
-
-	public void setTasks(List<Task> tasks) {
-		this.tasks = tasks;
-	}
-
-	public int getId() {
-		return id;
-	}
 
 }

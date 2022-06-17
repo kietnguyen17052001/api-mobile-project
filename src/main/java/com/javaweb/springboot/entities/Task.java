@@ -1,5 +1,6 @@
 package com.javaweb.springboot.entities;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
@@ -12,9 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "tbl_task")
-public class Task {
+public class Task implements Serializable {
+	private static final long serialVersionUID = 2247995789049326728L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -38,73 +43,5 @@ public class Task {
 	private Timestamp updatedAt;
 	@Column
 	private boolean completed;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public Category getCategory() {
-		return category;
-	}
-
-	public void setCategory(Category category) {
-		this.category = category;
-	}
-
-	public NewList getNewList() {
-		return newList;
-	}
-
-	public void setNewList(NewList newList) {
-		this.newList = newList;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Timestamp getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Timestamp createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Timestamp getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Timestamp updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	public boolean isCompleted() {
-		return completed;
-	}
-
-	public void setCompleted(boolean completed) {
-		this.completed = completed;
-	}
-
-	public int getId() {
-		return id;
-	}
 
 }

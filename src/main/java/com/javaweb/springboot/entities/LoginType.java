@@ -1,5 +1,6 @@
 package com.javaweb.springboot.entities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,9 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "tbl_login_type")
-public class LoginType {
+public class LoginType implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -21,25 +26,5 @@ public class LoginType {
 	private String name;
 	@OneToMany(mappedBy = "loginType")
 	private List<User> users;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
-
-	public int getId() {
-		return id;
-	}
 
 }
