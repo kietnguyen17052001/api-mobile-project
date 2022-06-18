@@ -17,9 +17,7 @@ public interface TaskService {
 
 	Task createNewListTask(Task task, int newListId);
 
-	Task update(int taskId, Task task);
-
-	Task complete(int taskId);
+	Task update(Task task);
 
 	void delete(int taskId);
 }

@@ -89,24 +89,9 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Task update(int taskId, Task taskRequest) {
+	public Task update(Task task) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		Task task = repository.findOneById(taskId);
 		task.setUpdatedAt(timestamp);
-		if (taskRequest.getName() != null) {
-			task.setName(taskRequest.getName());
-		}
-		if (taskRequest.getDescription() != null) {
-			task.setDescription(taskRequest.getDescription());
-		}
-		repository.save(task);
-		return task;
-	}
-
-	@Override
-	public Task complete(int taskId) {
-		Task task = repository.findOneById(taskId);
-		task.setCompleted(!task.isCompleted());
 		repository.save(task);
 		return task;
 	}

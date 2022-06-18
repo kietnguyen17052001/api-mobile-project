@@ -43,11 +43,10 @@ public class NewListController {
 		return modelMapper.map(service.create(newList, userId), NewListDto.class);
 	}
 
-	@PutMapping(value = "/{userId}/newLists/{newListId}")
-	public NewListDto update(@PathVariable(name = "newListId") int newListId,
-			@RequestBody NewListDto newListDtoRequest) {
+	@PutMapping(value = "/{userId}/newLists")
+	public NewListDto update(@RequestBody NewListDto newListDtoRequest) {
 		NewList newList = modelMapper.map(newListDtoRequest, NewList.class);
-		return modelMapper.map(service.update(newListId, newList), NewListDto.class);
+		return modelMapper.map(service.update(newList), NewListDto.class);
 	}
 
 	@DeleteMapping(value = "/{userId}/newLists/{newListId}")

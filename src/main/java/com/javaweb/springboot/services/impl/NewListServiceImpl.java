@@ -40,10 +40,8 @@ public class NewListServiceImpl implements NewListService {
 	}
 
 	@Override
-	public NewList update(int newListId, NewList newListRequest) {
+	public NewList update(NewList newList) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		NewList newList = repository.findOneById(newListId);
-		newList.setName(newListRequest.getName());
 		newList.setUpdatedAt(timestamp);
 		repository.save(newList);
 		return newList;

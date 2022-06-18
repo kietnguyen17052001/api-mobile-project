@@ -71,15 +71,10 @@ public class TaskController {
 		return modelMapper.map(service.createNewListTask(task, newListId), TaskDto.class);
 	}
 
-	@PutMapping(value = "/{userId}/tasks/{taskId}")
-	public TaskDto updateTask(@PathVariable(name = "taskId") int taskId, @RequestBody TaskDto taskDtoRequest) {
+	@PutMapping(value = "/{userId}/tasks")
+	public TaskDto updateTask(@RequestBody TaskDto taskDtoRequest) {
 		Task task = modelMapper.map(taskDtoRequest, Task.class);
-		return modelMapper.map(service.update(taskId, task), TaskDto.class);
-	}
-
-	@PutMapping(value = "/{userId}/tasks/{taskId}/completed")
-	public TaskDto complete(@PathVariable(name = "taskId") int taskId) {
-		return modelMapper.map(service.complete(taskId), TaskDto.class);
+		return modelMapper.map(service.update(task), TaskDto.class);
 	}
 
 	@DeleteMapping(value = "/{userId}/tasks/{taskId}")
