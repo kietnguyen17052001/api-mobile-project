@@ -74,7 +74,7 @@ public class TaskController {
 	@PutMapping(value = "/{userId}/tasks")
 	public TaskDto updateTask(@RequestBody TaskDto taskDtoRequest) {
 		Task task = modelMapper.map(taskDtoRequest, Task.class);
-		return modelMapper.map(service.update(task), TaskDto.class);
+		return modelMapper.map(service.update(taskDtoRequest.getId(), task), TaskDto.class);
 	}
 
 	@DeleteMapping(value = "/{userId}/tasks/{taskId}")

@@ -44,9 +44,9 @@ public class NewListController {
 	}
 
 	@PutMapping(value = "/{userId}/newLists")
-	public NewListDto update(@RequestBody NewListDto newListDtoRequest) {
-		NewList newList = modelMapper.map(newListDtoRequest, NewList.class);
-		return modelMapper.map(service.update(newList), NewListDto.class);
+	public NewListDto update(@RequestBody NewListDto newListDto) {
+		NewList newList = modelMapper.map(newListDto, NewList.class);
+		return modelMapper.map(service.update(newListDto.getId(), newList), NewListDto.class);
 	}
 
 	@DeleteMapping(value = "/{userId}/newLists/{newListId}")

@@ -45,13 +45,11 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public List<Task> getImportantTasks(int userId) {
-//		return repository.getTaskByIdCategory(userId, IMPORTANT_ID);
 		return getTasks(userId, IMPORTANT_ID);
 	}
 
 	@Override
 	public List<Task> getMydayTasks(int userId) {
-//		return repository.getTaskByIdCategory(userId, MYDAY_ID);
 		return getTasks(userId, MYDAY_ID);
 	}
 
@@ -89,11 +87,15 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Task update(Task task) {
+	public Task update(int taskId, Task task) {
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		task.setUpdatedAt(timestamp);
-		repository.save(task);
-		return task;
+		Task taskCurrent = repository.findOneById(taskId);
+		taskCurrent.setName(task.getName());
+		taskCurrent.setDescription(task.getDescription());
+		taskCurrent.setCompleted(task.isCompleted());
+		taskCurrent.setUpdatedAt(timestamp);
+		repository.save(taskCurrent);
+		return taskCurrent;
 	}
 
 	@Override

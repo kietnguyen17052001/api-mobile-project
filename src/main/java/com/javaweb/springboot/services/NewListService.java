@@ -9,7 +9,7 @@ public interface NewListService {
 
 	NewList create(NewList newList, int userId);
 
-	NewList update(NewList newList);
+	NewList update(int newListId, NewList newList);
 
 	void delete(int newListId);
 }
