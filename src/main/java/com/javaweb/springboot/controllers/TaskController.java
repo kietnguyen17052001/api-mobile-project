@@ -55,18 +55,21 @@ public class TaskController {
 
 	@PostMapping(value = "/{userId}/myday/tasks")
 	public TaskDto createMyDayTask(@PathVariable(name = "userId") int userId, @RequestBody TaskDto taskDto) {
+		taskDto.setDescription("nothing");
 		Task task = modelMapper.map(taskDto, Task.class);
 		return modelMapper.map(service.createMyDayTask(task, userId), TaskDto.class);
 	}
 
 	@PostMapping(value = "/{userId}/important/tasks")
 	public TaskDto createImportantTask(@PathVariable(name = "userId") int userId, @RequestBody TaskDto taskDto) {
+		taskDto.setDescription("nothing");
 		Task task = modelMapper.map(taskDto, Task.class);
 		return modelMapper.map(service.createImportantTask(task, userId), TaskDto.class);
 	}
 
 	@PostMapping(value = "/{userId}/newLists/{newListId}/tasks")
 	public TaskDto createNewListTask(@PathVariable(name = "newListId") int newListId, @RequestBody TaskDto taskDto) {
+		taskDto.setDescription("nothing");
 		Task task = modelMapper.map(taskDto, Task.class);
 		return modelMapper.map(service.createNewListTask(task, newListId), TaskDto.class);
 	}
